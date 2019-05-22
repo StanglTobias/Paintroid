@@ -131,6 +131,9 @@ public class MainActivityPresenterTest {
 	private MainActivityContracts.BottomBarViewHolder bottomBarViewHolder;
 
 	@Mock
+	private MainActivityContracts.BottomNavigationViewHolder bottomNavigationViewHolder;
+
+	@Mock
 	private Bitmap bitmap;
 
 	@InjectMocks
@@ -146,7 +149,7 @@ public class MainActivityPresenterTest {
 	public void testSetUp() {
 		verifyZeroInteractions(view, model, navigator, interactor, topBarViewHolder, workspace, perspective,
 				drawerLayoutViewHolder, navigationDrawerViewHolder, commandManager, bottomBarViewHolder,
-				toolReference, tool);
+				bottomNavigationViewHolder, toolReference, tool);
 	}
 
 	@Test

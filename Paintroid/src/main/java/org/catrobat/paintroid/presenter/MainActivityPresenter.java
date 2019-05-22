@@ -49,6 +49,7 @@ import org.catrobat.paintroid.common.MainActivityConstants.LoadImageRequestCode;
 import org.catrobat.paintroid.common.MainActivityConstants.PermissionRequestCode;
 import org.catrobat.paintroid.common.MainActivityConstants.SaveImageRequestCode;
 import org.catrobat.paintroid.contract.MainActivityContracts.BottomBarViewHolder;
+import org.catrobat.paintroid.contract.MainActivityContracts.BottomNavigationViewHolder;
 import org.catrobat.paintroid.contract.MainActivityContracts.DrawerLayoutViewHolder;
 import org.catrobat.paintroid.contract.MainActivityContracts.Interactor;
 import org.catrobat.paintroid.contract.MainActivityContracts.MainView;
@@ -110,6 +111,7 @@ public class MainActivityPresenter implements Presenter, SaveImageCallback, Load
 	private BottomBarViewHolder bottomBarViewHolder;
 	private DrawerLayoutViewHolder drawerLayoutViewHolder;
 	private NavigationDrawerViewHolder navigationDrawerViewHolder;
+	private BottomNavigationViewHolder bottomNavigationViewHolder;
 
 	private CommandManager commandManager;
 	private CommandFactory commandFactory = new DefaultCommandFactory();
@@ -123,7 +125,8 @@ public class MainActivityPresenter implements Presenter, SaveImageCallback, Load
 			Navigator navigator, Interactor interactor,
 			TopBarViewHolder topBarViewHolder, BottomBarViewHolder bottomBarViewHolder,
 			DrawerLayoutViewHolder drawerLayoutViewHolder,
-			NavigationDrawerViewHolder navigationDrawerViewHolder, CommandManager commandManager,
+			NavigationDrawerViewHolder navigationDrawerViewHolder,
+			BottomNavigationViewHolder bottomNavigationViewHolder, CommandManager commandManager,
 			ToolPaint toolPaint, Perspective perspective) {
 		this.view = view;
 		this.model = model;
@@ -139,6 +142,7 @@ public class MainActivityPresenter implements Presenter, SaveImageCallback, Load
 		this.topBarViewHolder = topBarViewHolder;
 		this.toolPaint = toolPaint;
 		this.perspective = perspective;
+		this.bottomNavigationViewHolder = bottomNavigationViewHolder;
 	}
 
 	private boolean isImageUnchanged() {
@@ -459,7 +463,7 @@ public class MainActivityPresenter implements Presenter, SaveImageCallback, Load
 	private void exitFullscreen() {
 		view.exitFullscreen();
 		topBarViewHolder.show();
-		bottomBarViewHolder.show();
+		bottomNavigationViewHolder.show();
 		navigationDrawerViewHolder.hideExitFullscreen();
 		navigationDrawerViewHolder.showEnterFullscreen();
 		toolOptionsController.enable();
@@ -472,6 +476,7 @@ public class MainActivityPresenter implements Presenter, SaveImageCallback, Load
 		view.enterFullscreen();
 		topBarViewHolder.hide();
 		bottomBarViewHolder.hide();
+		bottomNavigationViewHolder.hide();
 		navigationDrawerViewHolder.showExitFullscreen();
 		navigationDrawerViewHolder.hideEnterFullscreen();
 
@@ -531,6 +536,7 @@ public class MainActivityPresenter implements Presenter, SaveImageCallback, Load
 	@Override
 	public void toolClicked(ToolType type) {
 		bottomBarViewHolder.cancelAnimation();
+		bottomBarViewHolder.hide();
 
 		if (toolReference.get().getToolType() == type && type.hasOptions()) {
 			if (toolOptionsController.isVisible()) {
@@ -708,5 +714,33 @@ public class MainActivityPresenter implements Presenter, SaveImageCallback, Load
 	@Override
 	public boolean isFinishing() {
 		return view.isFinishing();
+	}
+
+	@Override
+	public void actionToolsClicked() {
+		if (toolOptionsController.isVisible()) {
+			toolOptionsController.hideAnimated();
+		}
+
+		if (bottomBarViewHolder.isVisible()) {
+			bottomBarViewHolder.hide();
+		} else {
+			bottomBarViewHolder.show();
+		}
+	}
+
+	@Override
+	public void actionCurrentToolClicked() {
+		if (bottomBarViewHolder.isVisible()) {
+			bottomBarViewHolder.hide();
+		}
+
+		if (toolOptionsController.isVisible()) {
+			toolOptionsController.hideAnimated();
+		} else {
+			if (toolReference.get().getToolType().hasOptions()) {
+				toolOptionsController.showAnimated();
+			}
+		}
 	}
 }

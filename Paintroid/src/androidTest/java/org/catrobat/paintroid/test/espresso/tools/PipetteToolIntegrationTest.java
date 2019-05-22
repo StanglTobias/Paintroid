@@ -33,12 +33,20 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.replaceText;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+
 import static org.catrobat.paintroid.test.espresso.util.UiInteractions.touchAt;
+import static org.catrobat.paintroid.test.espresso.util.UiMatcher.withBackground;
+import static org.catrobat.paintroid.test.espresso.util.wrappers.ColorPickerViewInteraction.onColorPickerView;
 import static org.catrobat.paintroid.test.espresso.util.wrappers.DrawingSurfaceInteraction.onDrawingSurfaceView;
 import static org.catrobat.paintroid.test.espresso.util.wrappers.LayerMenuViewInteraction.onLayerMenuView;
 import static org.catrobat.paintroid.test.espresso.util.wrappers.ToolBarViewInteraction.onToolBarView;
 import static org.catrobat.paintroid.test.espresso.util.wrappers.ToolPropertiesInteraction.onToolProperties;
 import static org.catrobat.paintroid.test.espresso.util.wrappers.TopBarViewInteraction.onTopBarView;
+import static org.hamcrest.Matchers.allOf;
 
 @RunWith(AndroidJUnit4.class)
 public class PipetteToolIntegrationTest {
@@ -78,8 +86,15 @@ public class PipetteToolIntegrationTest {
 		onDrawingSurfaceView()
 				.checkPixelColor(Color.BLACK, BitmapLocationProvider.MIDDLE);
 
+		onColorPickerView()
+				.performOpenColorPicker();
+		onView(allOf(withId(R.id.color_picker_tab_icon), withBackground(R.drawable.ic_color_picker_tab_rgba))).perform(click());
+		onView(withId(R.id.color_picker_color_rgb_hex)).perform(replaceText("#00000000"));
+		onColorPickerView()
+				.onOkButton()
+				.perform(click());
+
 		onToolProperties()
-				.setColorResource(R.color.pocketpaint_color_picker_transparent)
 				.checkMatchesColor(Color.TRANSPARENT);
 		onToolBarView()
 				.performSelectTool(ToolType.PIPETTE);
@@ -104,8 +119,14 @@ public class PipetteToolIntegrationTest {
 				.performAddLayer()
 				.performClose();
 
-		onToolProperties()
-				.setColor(Color.TRANSPARENT);
+		onColorPickerView()
+				.performOpenColorPicker();
+		onView(allOf(withId(R.id.color_picker_tab_icon), withBackground(R.drawable.ic_color_picker_tab_rgba))).perform(click());
+		onView(withId(R.id.color_picker_color_rgb_hex)).perform(replaceText("#00000000"));
+		onColorPickerView()
+				.onOkButton()
+				.perform(click());
+
 		onToolBarView()
 				.performSelectTool(ToolType.PIPETTE);
 

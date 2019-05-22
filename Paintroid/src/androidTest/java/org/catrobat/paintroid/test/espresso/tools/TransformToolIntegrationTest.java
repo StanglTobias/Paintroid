@@ -45,14 +45,20 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 import static org.catrobat.paintroid.test.espresso.util.EspressoUtils.waitForToast;
 import static org.catrobat.paintroid.test.espresso.util.UiInteractions.swipe;
 import static org.catrobat.paintroid.test.espresso.util.UiInteractions.touchAt;
+import static org.catrobat.paintroid.test.espresso.util.UiMatcher.withBackground;
 import static org.catrobat.paintroid.test.espresso.util.UiMatcher.withDrawable;
+import static org.catrobat.paintroid.test.espresso.util.wrappers.ColorPickerViewInteraction.onColorPickerView;
 import static org.catrobat.paintroid.test.espresso.util.wrappers.DrawingSurfaceInteraction.onDrawingSurfaceView;
 import static org.catrobat.paintroid.test.espresso.util.wrappers.LayerMenuViewInteraction.onLayerMenuView;
 import static org.catrobat.paintroid.test.espresso.util.wrappers.ToolBarViewInteraction.onToolBarView;
@@ -966,8 +972,14 @@ public class TransformToolIntegrationTest {
 
 	@Test
 	public void testRotateLeft() {
-		onToolProperties()
-				.setColorResource(R.color.pocketpaint_color_picker_green1);
+		onColorPickerView()
+				.performOpenColorPicker();
+		onView(allOf(withId(R.id.color_picker_tab_icon), withBackground(R.drawable.ic_color_picker_tab_rgba))).perform(click());
+		onView(withId(R.id.color_picker_color_rgb_hex)).perform(replaceText("#FF078707"));
+		onColorPickerView()
+				.onOkButton()
+				.perform(click());
+
 		onDrawingSurfaceView()
 				.perform(touchAt(DrawingSurfaceLocationProvider.HALFWAY_TOP_LEFT));
 
@@ -1018,8 +1030,14 @@ public class TransformToolIntegrationTest {
 
 	@Test
 	public void testRotateRight() {
-		onToolProperties()
-				.setColorResource(R.color.pocketpaint_color_picker_green1);
+		onColorPickerView()
+				.performOpenColorPicker();
+		onView(allOf(withId(R.id.color_picker_tab_icon), withBackground(R.drawable.ic_color_picker_tab_rgba))).perform(click());
+		onView(withId(R.id.color_picker_color_rgb_hex)).perform(replaceText("#FF078707"));
+		onColorPickerView()
+				.onOkButton()
+				.perform(click());
+
 		onDrawingSurfaceView()
 				.perform(touchAt(DrawingSurfaceLocationProvider.HALFWAY_TOP_LEFT));
 
@@ -1072,8 +1090,15 @@ public class TransformToolIntegrationTest {
 	public void testRotateMultipleColors() {
 		onDrawingSurfaceView()
 				.perform(touchAt(DrawingSurfaceLocationProvider.HALFWAY_TOP_LEFT));
-		onToolProperties()
-				.setColorResource(R.color.pocketpaint_color_picker_green1);
+
+		onColorPickerView()
+				.performOpenColorPicker();
+		onView(allOf(withId(R.id.color_picker_tab_icon), withBackground(R.drawable.ic_color_picker_tab_rgba))).perform(click());
+		onView(withId(R.id.color_picker_color_rgb_hex)).perform(replaceText("#FF078707"));
+		onColorPickerView()
+				.onOkButton()
+				.perform(click());
+
 		onDrawingSurfaceView()
 				.perform(touchAt(DrawingSurfaceLocationProvider.HALFWAY_BOTTOM_RIGHT));
 
