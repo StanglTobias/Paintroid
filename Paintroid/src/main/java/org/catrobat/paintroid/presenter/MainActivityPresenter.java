@@ -118,7 +118,6 @@ public class MainActivityPresenter implements Presenter, SaveImageCallback, Load
 	private boolean resetPerspectiveAfterNextCommand;
 	private Bundle toolBundle = new Bundle();
 	private ToolFactory toolFactory = new DefaultToolFactory();
-	private boolean focusAfterRecreate = true;
 
 	public MainActivityPresenter(MainView view, Model model, Workspace workspace,
 			ToolReference toolReference, ToolOptionsController toolOptionsController,
@@ -535,7 +534,6 @@ public class MainActivityPresenter implements Presenter, SaveImageCallback, Load
 
 	@Override
 	public void toolClicked(ToolType type) {
-		bottomBarViewHolder.cancelAnimation();
 		bottomBarViewHolder.hide();
 
 		if (toolReference.get().getToolType() == type && type.hasOptions()) {
@@ -558,20 +556,6 @@ public class MainActivityPresenter implements Presenter, SaveImageCallback, Load
 			Tool tool = toolFactory.createTool(type, toolOptionsController,
 					(Activity) view, commandManager, workspace, toolPaint);
 			switchTool(tool);
-		}
-	}
-
-	@Override
-	public void gotFocus() {
-		ToolType currentToolType = toolReference.get().getToolType();
-		if (focusAfterRecreate) {
-			if (model.wasInitialAnimationPlayed()) {
-				bottomBarViewHolder.scrollToButton(currentToolType, false);
-			} else {
-				bottomBarViewHolder.startAnimation(currentToolType);
-				model.setInitialAnimationPlayed(true);
-			}
-			focusAfterRecreate = false;
 		}
 	}
 
@@ -599,7 +583,6 @@ public class MainActivityPresenter implements Presenter, SaveImageCallback, Load
 
 		bottomBarViewHolder.deSelectToolButton(previousToolType);
 		bottomBarViewHolder.selectToolButton(toolType);
-		bottomBarViewHolder.scrollToButton(toolType, true);
 
 		int offset = topBarViewHolder.getHeight();
 		navigator.showToolChangeToast(offset, toolType.getNameResource());

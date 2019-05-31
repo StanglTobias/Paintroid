@@ -129,15 +129,7 @@
                 android:textSize="12sp"
                 android:textColor="@drawable/ic_pocketpaint_bottom_bar_selector"/>
         </LinearLayout>
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp"
-        android:baselineAligned="false">
         <LinearLayout
             android:id="@+id/pocketpaint_tools_rectangle"
             android:layout_weight="1"
@@ -186,6 +178,16 @@
                 android:textColor="@drawable/ic_pocketpaint_bottom_bar_selector"/>
         </LinearLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:baselineAligned="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp">
+
         <LinearLayout
             android:id="@+id/pocketpaint_tools_pipette"
             android:layout_weight="1"
@@ -233,15 +235,7 @@
                 android:textSize="12sp"
                 android:textColor="@drawable/ic_pocketpaint_bottom_bar_selector"/>
         </LinearLayout>
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp"
-        android:baselineAligned="false">
         <LinearLayout
             android:id="@+id/pocketpaint_tools_text"
             android:layout_weight="1"
@@ -276,18 +270,18 @@
             android:gravity="center"
             tools:ignore="UseCompoundDrawables"
             style="@style/Widget.AppCompat.Button.Borderless">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tint="@drawable/ic_pocketpaint_bottom_bar_selector"
-                    android:src="@drawable/ic_pocketpaint_tool_stamp"
-                    android:contentDescription="@string/button_stamp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/button_stamp"
-                    android:textSize="12sp"
-                    android:textColor="@drawable/ic_pocketpaint_bottom_bar_selector"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="@drawable/ic_pocketpaint_bottom_bar_selector"
+                android:src="@drawable/ic_pocketpaint_tool_stamp"
+                android:contentDescription="@string/button_stamp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_stamp"
+                android:textSize="12sp"
+                android:textColor="@drawable/ic_pocketpaint_bottom_bar_selector"/>
         </LinearLayout>
 
         <LinearLayout
@@ -300,18 +294,18 @@
             android:gravity="center"
             tools:ignore="UseCompoundDrawables"
             style="@style/Widget.AppCompat.Button.Borderless">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tint="@drawable/ic_pocketpaint_bottom_bar_selector"
-                    android:src="@drawable/ic_pocketpaint_tool_transform"
-                    android:contentDescription="@string/button_transform"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/button_transform"
-                    android:textSize="12sp"
-                    android:textColor="@drawable/ic_pocketpaint_bottom_bar_selector"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="@drawable/ic_pocketpaint_bottom_bar_selector"
+                android:src="@drawable/ic_pocketpaint_tool_transform"
+                android:contentDescription="@string/button_transform"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_transform"
+                android:textSize="12sp"
+                android:textColor="@drawable/ic_pocketpaint_bottom_bar_selector"/>
         </LinearLayout>
 
         <LinearLayout
@@ -337,6 +331,5 @@
                 android:textSize="12sp"
                 android:textColor="@drawable/ic_pocketpaint_bottom_bar_selector"/>
         </LinearLayout>
-
     </LinearLayout>
 </LinearLayout>

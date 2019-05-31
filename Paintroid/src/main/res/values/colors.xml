@@ -43,6 +43,10 @@
     <color name="pocketpaint_welcome_dot_active">#ffffffff</color>
     <color name="pocketpaint_welcome_dot_inactive">#64ffffff</color>
 
+    <!-- PocketPaint bottom bar -->
+    <color name="pocketpaint_bottom_bar_selected">#ff000000</color>
+    <color name="pocketpaint_bottom_bar_not_selected">#55000000</color>
+
     <!-- PocketPaint bottom navigation -->
     <color name="pocketpaint_bottom_navigation_selected">#ffffffff</color>
     <color name="pocketpaint_bottom_navigation_not_selected">#77ffffff</color>

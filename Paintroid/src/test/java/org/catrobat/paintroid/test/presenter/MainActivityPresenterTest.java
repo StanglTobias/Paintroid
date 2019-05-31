@@ -841,16 +841,6 @@ public class MainActivityPresenterTest {
 	}
 
 	@Test
-	public void testToolClickedThenCancelAnimation() {
-		when(toolReference.get()).thenReturn(tool);
-		when(tool.getToolType()).thenReturn(ToolType.BRUSH);
-
-		presenter.toolClicked(ToolType.BRUSH);
-
-		verify(bottomBarViewHolder).cancelAnimation();
-	}
-
-	@Test
 	public void testToolClickedWhenSameToolTypeThenToggleOptions() {
 		when(toolReference.get()).thenReturn(tool);
 		when(tool.getToolType()).thenReturn(ToolType.BRUSH);
@@ -869,41 +859,6 @@ public class MainActivityPresenterTest {
 		presenter.toolClicked(ToolType.ERASER);
 
 		verify(view).hideKeyboard();
-	}
-
-	@Test
-	public void testGotFocusThenPlayInitialAnimation() {
-		when(toolReference.get()).thenReturn(tool);
-		when(tool.getToolType()).thenReturn(ToolType.PIPETTE);
-
-		presenter.gotFocus();
-
-		verify(bottomBarViewHolder).startAnimation(ToolType.PIPETTE);
-		verify(model).setInitialAnimationPlayed(true);
-	}
-
-	@Test
-	public void testGotFocusWhenAlreadyPlayedThenScrollToTool() {
-		when(toolReference.get()).thenReturn(tool);
-		when(tool.getToolType()).thenReturn(ToolType.ERASER);
-		when(model.wasInitialAnimationPlayed()).thenReturn(true);
-
-		presenter.gotFocus();
-
-		verify(bottomBarViewHolder).scrollToButton(ToolType.ERASER, false);
-		verify(model, never()).setInitialAnimationPlayed(anyBoolean());
-	}
-
-	@Test
-	public void testGotFocusWhenGotFocusBeforeThenDoNothing() {
-		when(toolReference.get()).thenReturn(tool);
-		when(tool.getToolType()).thenReturn(ToolType.LINE);
-
-		presenter.gotFocus();
-		presenter.gotFocus();
-
-		verify(bottomBarViewHolder).startAnimation(ToolType.LINE);
-		verify(model).setInitialAnimationPlayed(true);
 	}
 
 	@Test

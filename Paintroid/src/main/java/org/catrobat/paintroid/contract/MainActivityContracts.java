@@ -174,8 +174,6 @@ public interface MainActivityContracts {
 
 		void toolClicked(ToolType toolType);
 
-		void gotFocus();
-
 		void saveBeforeLoadImage();
 
 		void saveBeforeNewImage();
@@ -273,15 +271,9 @@ public interface MainActivityContracts {
 
 		void hide();
 
-		void startAnimation(ToolType toolType);
-
 		void selectToolButton(ToolType toolType);
 
 		void deSelectToolButton(ToolType toolType);
-
-		void cancelAnimation();
-
-		void scrollToButton(ToolType toolType, boolean animate);
 
 		boolean isVisible();
 	}

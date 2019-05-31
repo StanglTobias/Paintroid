@@ -55,7 +55,6 @@ import org.catrobat.paintroid.command.implementation.DefaultCommandManager;
 import org.catrobat.paintroid.common.CommonFactory;
 import org.catrobat.paintroid.contract.LayerContracts;
 import org.catrobat.paintroid.contract.MainActivityContracts;
-import org.catrobat.paintroid.listener.BottomBarScrollListener;
 import org.catrobat.paintroid.model.LayerModel;
 import org.catrobat.paintroid.model.MainActivityModel;
 import org.catrobat.paintroid.presenter.LayerPresenter;
@@ -68,7 +67,6 @@ import org.catrobat.paintroid.tools.implementation.DefaultToolPaint;
 import org.catrobat.paintroid.tools.implementation.DefaultToolReference;
 import org.catrobat.paintroid.tools.implementation.DefaultWorkspace;
 import org.catrobat.paintroid.tools.options.ToolOptionsController;
-import org.catrobat.paintroid.ui.BottomBarHorizontalScrollView;
 import org.catrobat.paintroid.ui.DrawingSurface;
 import org.catrobat.paintroid.ui.KeyboardListener;
 import org.catrobat.paintroid.ui.LayerAdapter;
@@ -352,11 +350,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
 				}
 			});
 		}
-
-		View next = viewHolder.layout.findViewById(R.id.pocketpaint_bottom_next);
-		View previous = viewHolder.layout.findViewById(R.id.pocketpaint_bottom_previous);
-		BottomBarHorizontalScrollView horizontalScrollView = (BottomBarHorizontalScrollView) viewHolder.scrollView;
-		horizontalScrollView.setScrollStateListener(new BottomBarScrollListener(previous, next));
 	}
 
 	private void setBottomNavigationListeners(final BottomNavigationViewHolder viewHolder) {
@@ -398,13 +391,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
 						return true;
 					}
 				});
-	}
-
-	@Override
-	public void onWindowFocusChanged(boolean hasFocus) {
-		if (hasFocus) {
-			presenter.gotFocus();
-		}
 	}
 
 	@Override
