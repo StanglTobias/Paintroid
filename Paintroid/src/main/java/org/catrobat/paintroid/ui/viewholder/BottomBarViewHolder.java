@@ -19,8 +19,10 @@
 
 package org.catrobat.paintroid.ui.viewholder;
 
+import android.support.design.widget.BottomSheetBehavior;
 import android.view.View;
 
+import org.catrobat.paintroid.R;
 import org.catrobat.paintroid.contract.MainActivityContracts;
 import org.catrobat.paintroid.tools.ToolType;
 
@@ -35,12 +37,15 @@ public class BottomBarViewHolder implements MainActivityContracts.BottomBarViewH
 
 	@Override
 	public void show() {
-		layout.setVisibility(View.VISIBLE);
+		BottomSheetBehavior behavior = BottomSheetBehavior.from(layout.findViewById(R.id.pocketpaint_tools_layout));
+		behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 	}
 
 	@Override
 	public void hide() {
-		layout.setVisibility(View.GONE);
+		BottomSheetBehavior behavior = BottomSheetBehavior.from(layout.findViewById(R.id.pocketpaint_tools_layout));
+		behavior.setPeekHeight(0);
+		behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 	}
 
 	@Override
@@ -58,7 +63,9 @@ public class BottomBarViewHolder implements MainActivityContracts.BottomBarViewH
 
 	@Override
 	public boolean isVisible() {
-		return layout.getVisibility() == View.VISIBLE;
+		BottomSheetBehavior behavior = BottomSheetBehavior.from(layout.findViewById(R.id.pocketpaint_tools_layout));
+		return behavior.getState() == BottomSheetBehavior.STATE_EXPANDED;
+		//return layout.getVisibility() == View.VISIBLE;
 	}
 }
 
