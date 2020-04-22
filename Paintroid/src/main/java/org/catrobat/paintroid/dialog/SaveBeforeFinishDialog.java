@@ -72,7 +72,7 @@ public class SaveBeforeFinishDialog extends MainActivityDialogFragment {
 	}
 
 	public enum SaveBeforeFinishDialogType {
-		BACK_TO_POCKET_CODE(R.string.closing_catroid_security_question_title, R.string.closing_security_question),
+		BACK_TO_POCKET_CODE(R.string.closing_security_question_title, R.string.closing_security_question),
 		FINISH(R.string.closing_security_question_title, R.string.closing_security_question);
 
 		private final int titleResource;
