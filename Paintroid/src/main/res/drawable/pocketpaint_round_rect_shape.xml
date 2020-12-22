@@ -1,4 +1,4 @@
-/**
+<!--
  *  Paintroid: An image manipulation application for Android.
  *  Copyright (C) 2010-2015 The Catrobat Team
  *  (<http://developer.catrobat.org/credits>)
@@ -15,39 +15,16 @@
  *
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+ -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle" >
 
-task checkstyle(type: Checkstyle) {
-    configFile file('config/checkstyle.xml')
-    source '.'
-    include '**/*.java', '**/*.kt','**/*.xml', '**/*.gradle'
-    exclude '**/gen/**', '**/build/**', 'libraryProjects/**', '**/.idea/**'
+    <solid android:color="#ffffff" />
 
-    classpath = files()
+    <corners
+        android:bottomLeftRadius="8dp"
+        android:bottomRightRadius="8dp"
+        android:topLeftRadius="8dp"
+        android:topRightRadius="8dp" />
 
-    // needed for console output of warnings/errors
-    showViolations true
-    ignoreFailures false
-
-    reports {
-        xml.enabled = true
-        xml.destination file("build/reports/checkstyle.xml")
-    }
-}
-
-task pmd(type: Pmd) {
-    ruleSetFiles = files('config/pmd.xml')
-    ruleSets = []
-
-    source '.'
-    include '**/*.java', '**/*.kt'
-    exclude '**/gen/**', '**/build/**', '**/res/**'
-
-    ignoreFailures false
-
-    reports {
-        xml.enabled = true
-        html.enabled = true
-        xml.destination file("build/reports/pmd.xml")
-    }
-}
+</shape>
